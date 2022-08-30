@@ -5,5 +5,6 @@ I based this project off of [this repo](https://github.com/ZoeLiao/Django-GraphQ
 The purpose of this repo is to learn more about devops (Docker, K8s, Nginx, CI/CD pipelines, etc).
 
 # To Run:
-`docker-compose up`
+1. `docker-compose up`
+1. Navigate in browser to `localhost:3050`
 

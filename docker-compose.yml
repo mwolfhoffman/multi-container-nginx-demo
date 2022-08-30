@@ -1,9 +1,11 @@
+# https://www.youtube.com/watch?v=-pTel5FojAQ
+# https://gitlab.com/codeching/docker-multicontainer-application-react-nodejs-postgres-nginx-basic/-/blob/master/docker-compose.yml
 version: "3.2"
 services:
   api:
     restart: always
     container_name: api
-    command : bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./api:/api
     build:
@@ -11,10 +13,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-
   client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     restart: always
-    command : npm start
+    command: npm start
     container_name: client
     volumes:
       - ./client:/client
@@ -23,8 +27,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    stdin_open: true
     depends_on:
       - api
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "3050:80"
+
 volumes:
   node-modules:
