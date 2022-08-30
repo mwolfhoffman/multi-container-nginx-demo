@@ -135,6 +135,6 @@ GRAPHENE = {
     'SCHEMA': 'core.schema.schema'
 }
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1").split()
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'api']
 
 

@@ -4,7 +4,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { UserInfo, CreateUser } from "./User";
 
 const client = new ApolloClient({
-  uri: '/api/graphql',
+  uri: '/api/graphql/',
   headers: {
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE OPTIONS",
     "Access-Control-Allow-Origin": "*",
