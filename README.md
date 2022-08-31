@@ -1,4 +1,4 @@
-# django-graphql-react-docker
+# multi-container-nginx-demo
 
 This is a multi-container application (Django graphql API + react client, served with nginx)
 
