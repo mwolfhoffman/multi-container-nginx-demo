@@ -6,5 +6,5 @@ The purpose of this repo is to learn more about devops (Docker, K8s, Nginx, CI/C
 
 # To Run:
 1. `docker-compose up`
-1. Navigate in browser to `localhost:3050`
+1. Navigate in browser to `localhost:8080`
 

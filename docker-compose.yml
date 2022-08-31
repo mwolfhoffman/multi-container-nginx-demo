@@ -1,5 +1,3 @@
-# https://www.youtube.com/watch?v=-pTel5FojAQ
-# https://gitlab.com/codeching/docker-multicontainer-application-react-nodejs-postgres-nginx-basic/-/blob/master/docker-compose.yml
 version: "3.2"
 services:
   api:
@@ -38,7 +36,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "3050:80"
+      - "8080:80"
 
 volumes:
   node-modules:

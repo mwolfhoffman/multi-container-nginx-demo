@@ -4,7 +4,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { UserInfo, CreateUser } from "./User";
 
 const client = new ApolloClient({
-  uri: '/api/graphql/',
+  uri: process.env.REACT_APP_API_BASE_PATH,
   headers: {
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE OPTIONS",
     "Access-Control-Allow-Origin": "*",
@@ -25,7 +25,7 @@ const App = () => (
       }}
     >
       <h2>
-        My first Apollo app{" "}
+        My first Apollo apppp{" "}
         <span role="img" aria-label="rocket">
           🚀
         </span>
