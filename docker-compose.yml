@@ -1,5 +1,13 @@
 version: "3.2"
 services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
   api:
     restart: always
     container_name: api
@@ -11,6 +19,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    environment:
+      - PG_USER=postgres
+      - PG_HOST=postgres
+      - PG_DATABASE=postgres
+      - PG_PASSWORD=postgres_password
+      - PG_PORT=5432
+    depends_on:
+      - db
+    links:
+      - db
   client:
     stdin_open: true
     environment:
@@ -40,3 +58,4 @@ services:
 
 volumes:
   node-modules:
+  postgres_data:
