@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -53,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # CORS_ORIGIN_WHITELIST = [
 #     'http://127.0.0.1:3000',
@@ -85,12 +86,15 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get('PG_DATABASE'),
+        "USER": os.environ.get('PG_USER'),
+        "PASSWORD": os.environ.get('PG_PASSWORD'),
+        "HOST": os.environ.get('PG_HOST'),
+        "PORT": os.environ.get('PG_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -135,6 +139,4 @@ GRAPHENE = {
     'SCHEMA': 'core.schema.schema'
 }
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'api']
-
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'api']
