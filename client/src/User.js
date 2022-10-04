@@ -28,7 +28,7 @@ export function UserInfo() {
 
   // Polling: rovides near-real-time synchronization with your server
   // by causing a query to execute periodically at a specified interval
-  const { data, loading } = useQuery(QUERY_USERS, { pollInterval: 500 });
+  const { data, loading } = useQuery(QUERY_USERS);
   // should handle loading status
   if (loading) return <p>Loading...</p>;
 
