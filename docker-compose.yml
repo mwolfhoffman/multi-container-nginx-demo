@@ -1,7 +1,4 @@
 version: "3.2"
-networks:
-  app:
-    driver: bridge
 services:
   postgres:
     image: postgres:13-alpine
@@ -11,8 +8,6 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=postgres_password
-    networks:
-      - app
   api:
     restart: always
     container_name: api
@@ -34,9 +29,6 @@ services:
       - postgres
     links:
       - postgres
-    networks:
-      - app
-
   client:
     stdin_open: true
     environment:
@@ -53,8 +45,6 @@ services:
       - "3000:3000"
     depends_on:
       - api
-    networks:
-      - app
   nginx:
     depends_on:
       - api
