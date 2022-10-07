@@ -1,3 +1,4 @@
+from datetime import datetime
 from graphene_django import DjangoObjectType
 import graphene
 from core.models import TodoModel
@@ -22,19 +23,13 @@ class Query(graphene.ObjectType):
 class CreateTodo(graphene.Mutation):
     id = graphene.Int()
     text = graphene.String()
-    completed = graphene.Boolean()
-    created_at = graphene.DateTime()
-    updated_at = graphene.DateTime()
 
     class Arguments:
         text = graphene.String()
-        completed = graphene.Boolean()
-        created_at = graphene.DateTime()
-        updated_at = graphene.DateTime()
 
-    def mutate(self, info, text, completed, created_at, updated_at):
-        todo = TodoModel(text=text, completed=completed,
-                         created_at=created_at, updated_at=updated_at)
+    def mutate(self, info, text):
+        todo = TodoModel(text=text, completed=False,
+                         created_at=datetime.now(), updated_at=datetime.now())
         todo.save()
 
         return CreateTodo(
@@ -42,7 +37,7 @@ class CreateTodo(graphene.Mutation):
             text=todo.text,
             completed=todo.completed,
             created_at=todo.created_at,
-            updated_at=todo.udpated_at,
+            updated_at=todo.updated_at,
         )
 
 
