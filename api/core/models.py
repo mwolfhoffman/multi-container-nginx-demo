@@ -12,5 +12,5 @@ class UserModel(models.Model):
 class TodoModel(models.Model):
     text = models.TextField(max_length=1000)
     completed = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=datetime.now())
-    updated_at = models.DateTimeField(default=datetime.now())
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
