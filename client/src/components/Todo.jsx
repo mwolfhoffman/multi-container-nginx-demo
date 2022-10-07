@@ -22,16 +22,31 @@ const CREATE_TODO = gql`
   }
 `;
 
+const DELETE_TODO = gql`
+  mutation deleteTodo($id: Int!) {
+    deleteTodo(id: $id) {
+      success
+    }
+  }
+`;
+
 export function TodosList() {
   const { data, loading } = useQuery(FETCH_TODOS);
+  const [deleteTodo] = useMutation(DELETE_TODO);
 
   if (loading) return <p>Loading...</p>;
 
-  return data?.todos.map(({ id, text }) => (
-    <div key={id}>
-      <p>{text}</p>
-    </div>
-  ));
+  return (
+    <table>
+      {data?.todos.map(({ id, text }) => (
+        <tr key={id}>
+          <td>{text}</td>
+          <td>&#128394;</td>
+          <td onClick={(e) => deleteTodo(id)}>&#10060;</td>
+        </tr>
+      ))}
+    </table>
+  );
 }
 
 export function CreateTodoForm() {

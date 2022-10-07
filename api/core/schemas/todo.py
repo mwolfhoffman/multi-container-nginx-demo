@@ -41,8 +41,26 @@ class CreateTodo(graphene.Mutation):
         )
 
 
+class DeleteTodo(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+
+    success = graphene.Boolean()
+
+    @classmethod
+    def mutate(cls, rood, info, id):
+        todo = TodoModel.objects.get(id=id)
+        todo.delete()
+        return DeleteTodo(
+            success=True
+        )
+
+
 class Mutation(graphene.ObjectType):
     create_todo = CreateTodo.Field()
+    delete_todo = DeleteTodo.Field()
 
 
 schema = graphene.Schema(
