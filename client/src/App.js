@@ -1,7 +1,7 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { UserInfo, CreateUser } from "./User";
+import { TodosList, CreateTodoForm } from "./components/Todo";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_API_BASE_PATH,
@@ -25,14 +25,14 @@ const App = () => (
       }}
     >
       <h2>
-        My first Apollo apppp{" "}
+        Anotha Todo List
         <span role="img" aria-label="rocket">
           🚀
         </span>
       </h2>
 
-      <CreateUser />
-      <UserInfo />
+      <CreateTodoForm />
+      <TodosList />
     </div>
   </ApolloProvider>
 );
