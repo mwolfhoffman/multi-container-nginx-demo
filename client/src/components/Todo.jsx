@@ -30,6 +30,14 @@ const DELETE_TODO = gql`
   }
 `;
 
+const EDIT_TODO = gql`
+  mutation editTodo($id: Int!, $text: String!) {
+    editTodo(id: $id, text: $text) {
+      success
+    }
+  }
+`;
+
 export function TodosList() {
   const { data, loading, refetch: refetchTodos } = useQuery(FETCH_TODOS);
   const [
@@ -37,10 +45,25 @@ export function TodosList() {
     { data: _deletedData, loading: deletedLoading, error: _deletedError },
   ] = useMutation(DELETE_TODO);
 
+  const [
+    editTodo,
+    { data: _editdData, loading: editdLoading, error: _editdError },
+  ] = useMutation(EDIT_TODO);
+
   const removeTodo = async (id) => {
     const { data } = await deleteTodo({ variables: { id } });
     if (data.deleteTodo.success) {
       refetchTodos();
+    }
+  };
+
+  const edit = async (id, text) => {
+    const updatedText = prompt("Please Update:", text);
+    if (updatedText) {
+      const { data } = await editTodo({ variables: { id, text:updatedText } });
+      if (data.editTodo.success) {
+        refetchTodos();
+      }
     }
   };
 
@@ -51,7 +74,7 @@ export function TodosList() {
       {data?.todos.map(({ id, text }) => (
         <tr key={id}>
           <td>{text}</td>
-          <td>&#128394;</td>
+          <td onClick={(e) => edit(id, text)}>&#128394;</td>
           <td onClick={(e) => removeTodo(id)}>&#10060;</td>
         </tr>
       ))}
