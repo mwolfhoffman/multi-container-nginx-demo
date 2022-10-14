@@ -16,3 +16,6 @@ The containers in this application include:
 1. `docker compose up`
 1. Navigate in browser to `localhost:8080`
 
+# To Test:
+1. `docker compose exec api python manage.py test`
+
