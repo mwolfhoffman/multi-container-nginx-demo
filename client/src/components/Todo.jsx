@@ -31,21 +31,20 @@ const DELETE_TODO = gql`
 `;
 
 export function TodosList() {
+  const { data, loading, refetch: refetchTodos } = useQuery(FETCH_TODOS);
+  const [
+    deleteTodo,
+    { data: _deletedData, loading: deletedLoading, error: _deletedError },
+  ] = useMutation(DELETE_TODO);
+
   const removeTodo = async (id) => {
-    const {data} = await deleteTodo({ variables: { id } });
-    console.log(data);
-    if(data.deleteTodo.success){
-      console.log('delete')
+    const { data } = await deleteTodo({ variables: { id } });
+    if (data.deleteTodo.success) {
+      refetchTodos();
     }
   };
 
-  const { data, loading } = useQuery(FETCH_TODOS);
-  const [
-    deleteTodo,
-    { data: deletedData, loading: deletedLoading, error: deletedError },
-  ] = useMutation(DELETE_TODO);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading || deletedLoading) return <p>Loading...</p>;
 
   return (
     <table>
