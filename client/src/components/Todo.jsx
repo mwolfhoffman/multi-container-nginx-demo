@@ -31,8 +31,19 @@ const DELETE_TODO = gql`
 `;
 
 export function TodosList() {
+  const removeTodo = async (id) => {
+    const {data} = await deleteTodo({ variables: { id } });
+    console.log(data);
+    if(data.deleteTodo.success){
+      console.log('delete')
+    }
+  };
+
   const { data, loading } = useQuery(FETCH_TODOS);
-  const [deleteTodo] = useMutation(DELETE_TODO);
+  const [
+    deleteTodo,
+    { data: deletedData, loading: deletedLoading, error: deletedError },
+  ] = useMutation(DELETE_TODO);
 
   if (loading) return <p>Loading...</p>;
 
@@ -42,7 +53,7 @@ export function TodosList() {
         <tr key={id}>
           <td>{text}</td>
           <td>&#128394;</td>
-          <td onClick={(e) => deleteTodo(id)}>&#10060;</td>
+          <td onClick={(e) => removeTodo(id)}>&#10060;</td>
         </tr>
       ))}
     </table>
