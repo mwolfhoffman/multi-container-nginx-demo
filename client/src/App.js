@@ -12,29 +12,31 @@ const client = new ApolloClient({
   },
 });
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <div
-      style={{
-        backgroundColor: "#00000008",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        flexDirection: "column",
-      }}
-    >
-      <h2>
-        Anotha Todo List
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>
-      </h2>
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <div
+        style={{
+          backgroundColor: "#00000008",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          flexDirection: "column",
+        }}
+      >
+        <h2>
+          Anotha Todo List
+          <span role="img" aria-label="rocket">
+            🚀
+          </span>
+        </h2>
 
-      <CreateTodoForm />
-      <TodosList />
-    </div>
-  </ApolloProvider>
-);
+        <CreateTodoForm />
+        <TodosList />
+      </div>
+    </ApolloProvider>
+  );
+}
 
 export default App;

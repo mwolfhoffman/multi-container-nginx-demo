@@ -1,6 +1,6 @@
-import React from "react";
-import { useQuery, useMutation } from "react-apollo";
-import { gql } from "apollo-boost";
+import React from 'react';
+import { useQuery, useMutation } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 const FETCH_TODOS = gql`
   query {
@@ -58,9 +58,9 @@ export function TodosList() {
   };
 
   const edit = async (id, text) => {
-    const updatedText = prompt("Please Update:", text);
+    const updatedText = prompt('Please Update:', text);
     if (updatedText) {
-      const { data } = await editTodo({ variables: { id, text:updatedText } });
+      const { data } = await editTodo({ variables: { id, text: updatedText } });
       if (data.editTodo.success) {
         refetchTodos();
       }
@@ -96,19 +96,19 @@ export function CreateTodoForm() {
               text: text.value,
             },
           });
-          text.value = "";
+          text.value = '';
           window.location.reload(); // Todo: Remove need this.
         }}
-        style={{ marginTop: "2em", marginBottom: "2em" }}
+        style={{ marginTop: '2em', marginBottom: '2em' }}
       >
         <label>Todo: </label>
         <input
           ref={(node) => {
             text = node;
           }}
-          style={{ marginRight: "1em" }}
+          style={{ marginRight: '1em' }}
         />
-        <button type="submit" style={{ cursor: "pointer" }}>
+        <button type="submit" style={{ cursor: 'pointer' }}>
           Add Todo
         </button>
       </form>

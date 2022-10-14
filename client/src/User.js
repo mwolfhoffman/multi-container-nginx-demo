@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery, useMutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-
 const QUERY_USERS = gql`
 query {
   users {
@@ -23,9 +22,7 @@ mutation createUser ($firstName: String!, $lastName: String!){
 }
 `;
 
-
 export function UserInfo() {
-
   // Polling: rovides near-real-time synchronization with your server
   // by causing a query to execute periodically at a specified interval
   const { data, loading } = useQuery(QUERY_USERS);
@@ -33,37 +30,46 @@ export function UserInfo() {
   if (loading) return <p>Loading...</p>;
 
   return data?.users.map(({ id, firstName, lastName }) => (
-    <div key={ id }>
+    <div key={id}>
       <p>
-        User - { id }: { firstName } { lastName }
+        User -
+        {' '}
+        { id }
+        :
+        {' '}
+        { firstName }
+        {' '}
+        { lastName }
       </p>
     </div>
   ));
 }
 
 export function CreateUser() {
-
-  let firstName, lastName;
-  const [ createUser ] = useMutation(CREATE_USER);
+  let firstName; let
+    lastName;
+  const [createUser] = useMutation(CREATE_USER);
 
   return (
     <div>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
-          createUser({ variables: {
+          createUser({
+            variables: {
               firstName: firstName.value,
-              lastName: lastName.value
-          } });
+              lastName: lastName.value,
+            },
+          });
           firstName.value = '';
           lastName.value = '';
           window.location.reload();
         }}
-        style = {{ marginTop: '2em', marginBottom: '2em' }}
+        style={{ marginTop: '2em', marginBottom: '2em' }}
       >
         <label>First Name: </label>
         <input
-          ref={node => {
+          ref={(node) => {
             firstName = node;
           }}
           style={{ marginRight: '1em' }}
@@ -71,7 +77,7 @@ export function CreateUser() {
 
         <label>Last Name: </label>
         <input
-          ref={node => {
+          ref={(node) => {
             lastName = node;
           }}
           style={{ marginRight: '1em' }}
@@ -80,5 +86,4 @@ export function CreateUser() {
       </form>
     </div>
   );
-
 }
