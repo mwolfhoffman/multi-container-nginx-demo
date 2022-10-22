@@ -1,0 +1,16 @@
+services:
+  - docker
+
+before_install:
+  - docker compose build
+
+script:
+  - docker compose up -d
+  - docker compose exec api python manage.py test
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag multi-container-test $DOCKER_USER/multi-container-test:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_USER/multi-container-test:$TRAVIS_BUILD_NUMBER
+  - docker tag multi-container-test $DOCKER_USER/multi-container-test:latest
+  - docker push $DOCKER_USER/multi-container-test:latest
