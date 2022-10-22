@@ -5,7 +5,8 @@ before_install:
   - docker build -t $DOCKER_USER/multi-container-test .
 
 script:
-  - docker run $DOCKER_USER/multi-container-test
+  - docker compose up -d
+  - docker compose exec api python manage.py test
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
