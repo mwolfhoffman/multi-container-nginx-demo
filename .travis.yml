@@ -7,7 +7,6 @@ services:
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - alias docker-compose='docker compose'
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker compose --version
@@ -15,11 +14,11 @@ before_install:
 script:
   # TODO: Lint
   # BUILD PROJECT
-  - docker-compose build
+  - docker compose build
   # TESTS
-  - docker-compose up -d
+  - docker compose up -d
   - sleep 10
-  - docker-compose exec api python manage.py test
+  - docker compose exec api python manage.py test
   # TODO: run UI tests.
 
 after_success:
