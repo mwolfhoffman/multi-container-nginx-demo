@@ -18,7 +18,7 @@ before_install:
 script:
   # TODO: Lint
   # BUILD PROJECT
-  - docker build -t multi-container-test $DOCKER_USER/multi-container-test .
+  - docker-compose build
   # TESTS
   - docker-compose up -d
   - docker-compose exec api python manage.py test
