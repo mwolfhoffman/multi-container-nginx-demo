@@ -7,3 +7,5 @@ RUN apk update && apk add docker-compose
 WORKDIR /app
 
 COPY . /app
+
+USER root
