@@ -8,8 +8,7 @@ script:
   - sudo rm /usr/local/bin/docker-compose
   - sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
   - ls -lha /usr/bin
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  - chmod +x /usr/bin/docker-compose
   - docker-compose --version
   # TODO: Lint
   # BUILD PROJECT
