@@ -7,7 +7,7 @@ services:
   - docker
 
 before_script:
-  - chmod g+rx,o+rx /
+  # - chmod g+rx,o+rx /
   - apk add sudo
   - sudo rm /usr/local/bin/docker-compose
   - sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
