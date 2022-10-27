@@ -6,7 +6,7 @@ sudo: required
 services:
   - docker
 
-before_script:
+install:
   # - chmod g+rx,o+rx /
   - apk add sudo
   - sudo rm /usr/local/bin/docker-compose
