@@ -6,22 +6,22 @@ sudo: required
 services:
   - docker
 
-script:
+before_script:
   - chmod g+rx,o+rx /
   - apk add sudo
   - sudo rm /usr/local/bin/docker-compose
   - sudo curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
   - ls -lha /usr/bin
   - sudo chmod +x /usr/bin/docker-compose
+
+script:
   - docker-compose --version
-  # TODO: Lint
-  # BUILD PROJECT
   - docker-compose build
-  # TESTS
   - docker-compose up -d
   - sleep 10
+
+after_script:
   - docker-compose exec api python manage.py test
-  # TODO: run UI tests.
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
